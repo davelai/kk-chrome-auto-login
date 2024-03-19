@@ -19,13 +19,15 @@ chrome.webNavigation.onCompleted.addListener(
 );
 
 function be2Login(tab, account, password) {
-    chrome.tabs.executeScript(tab.id, {
-        code: `
-            document.querySelector('input[type="email"]').value = '${account}';
-            document.querySelector('input[type="password"]').value = '${password}';
+    chrome.scripting.executeScript({
+        target: {tabId: tab.tabId},
+        func: (account, password) => {
+            document.querySelector('input[type="email"]').value = account;
+            document.querySelector('input[type="password"]').value = password;
             document.querySelector('button[type="button"]').click();
-        `
-    });
+        },
+        args: [account, password]
+    }, () => {});
 }
 
 function rbmsLogin(tab, account, password) {
@@ -33,13 +35,15 @@ function rbmsLogin(tab, account, password) {
     // <input type="password" class="form-control" placeholder="密碼" name="password">
     // <button type="submit" className="btn btn-primary btn-block btn-flat">登錄</button>
 
-    chrome.tabs.executeScript(tab.id, {
-        code: `
-            document.querySelector('input[name="username"]').value = '${account}';
-            document.querySelector('input[name="password"]').value = '${password}';
+    chrome.scripting.executeScript({
+        target: {tabId: tab.tabId},
+        func: (account, password) => {
+            document.querySelector('input[name="username"]').value = account;
+            document.querySelector('input[name="password"]').value = password;
             document.querySelector('button[type="submit"]').click();
-        `
-    });
+        },
+        args: [account, password]
+    }, () => {});
 }
 
 function ifLoginPage(url) {
