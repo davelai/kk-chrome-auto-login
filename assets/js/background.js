@@ -6,7 +6,7 @@ chrome.webNavigation.onCompleted.addListener(
 
         let service = getService(tab.url);
         const environment = getEnvironment(tab.url);
-        const account = accountInfo(environment, 'rbms');
+        const account = accountInfo(environment, service);
         switch (service) {
             case 'rbms':
                 rbmsLogin(tab, account.username, account.password);
