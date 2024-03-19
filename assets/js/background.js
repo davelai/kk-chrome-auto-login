@@ -43,7 +43,9 @@ function be2Login(tab, account, password) {
                 passwordInput.dispatchEvent(event);
             }
 
-            document.querySelector('button[type="button"]').click();
+            setTimeout(() => {
+                document.querySelector('button[type="button"]').click();
+            }, 500);
         },
         args: [account, password]
     }, () => {});
