@@ -22,8 +22,27 @@ function be2Login(tab, account, password) {
     chrome.scripting.executeScript({
         target: {tabId: tab.tabId},
         func: (account, password) => {
+            const loginButton = Array.from(document.querySelectorAll('.button-text')).find(el => el.textContent.trim() === 'Log In');
+            if (loginButton) {
+                // 初始按鈕
+                loginButton.click();
+                return;
+            }
+
+            // 彈出視窗
             document.querySelector('input[type="email"]').value = account;
-            document.querySelector('input[type="password"]').value = password;
+            const passwordInput = document.querySelector('.login-panel-password input[type="password"]');
+            for (let i = 0; i < password.length; i++) {
+                const char = password.charAt(i);
+                passwordInput.value += char;
+                const event = new KeyboardEvent('input', {
+                    bubbles: true,
+                    cancelable: true,
+                    key: char,
+                });
+                passwordInput.dispatchEvent(event);
+            }
+
             document.querySelector('button[type="button"]').click();
         },
         args: [account, password]
