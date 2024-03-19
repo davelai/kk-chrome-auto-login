@@ -82,11 +82,11 @@ function accountInfo(environment, $service) {
 }
 
 function getService(url) {
-    if (tab.url.includes('rbms')) {
+    if (url.includes('rbms')) {
         return 'rbms';
     }
 
-    if (tab.url.includes('be2')) {
+    if (url.includes('be2')) {
         return 'be2';
     }
 
