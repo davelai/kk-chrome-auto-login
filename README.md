@@ -3,8 +3,7 @@
 ### Chrome Extension
 
 1. `npm install`
-2. `npm run dev`
-3. modify account and password in `assets/js/background.js`
+2. modify account and password in `assets/js/background.js`
    ```javascript
     const accounts = {
         'sit': {
@@ -29,4 +28,5 @@
         }
     }
     ```
+3. `npm run dev`
 4. install Chrome extension
